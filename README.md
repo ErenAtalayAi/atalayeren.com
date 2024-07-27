@@ -1,55 +1,40 @@
-# Using the State Hook
+# Proje Başlığı
 
-The [introduction page](https://reactjs.org/docs/hooks-intro.html) used this example to get familiar with Hooks:
+## Açıklama
 
-<Code language="javascript">
-import React, { useState } from 'react';
-function Example() {
-  // Declare a new state variable, which we'll call "count"
-  const [count, setCount] = useState(0);
-  return (
-    &lt;div>
-      &lt;p>You clicked {count} times</p>
-      &lt;button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
-  );
-}
-export default Example;
-</Code>
+Bu proje, [Proje Adı] adında bir uygulama veya yazılımın örnek bir `README.md` dosyasıdır. Proje, [Açıklama] amacıyla geliştirilmiştir ve [teknoloji] kullanılarak yapılmıştır.
 
-We’ll start learning about Hooks by comparing this code to an equivalent class example.
+## Özellikler
 
-# Equivalent Class Example
+- Özellik 1: [Açıklama]
+- Özellik 2: [Açıklama]
+- Özellik 3: [Açıklama]
 
-If you used classes in React before, this code should look familiar:
+## Kurulum
 
-<Code language="javascript">
-class Example extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0
-    };
-  }
+Projeyi yerel makinenize kurmak için aşağıdaki adımları takip edin:
 
-  render() {
-    return (
-      &lt;div>
-        &lt;p>You clicked {this.state.count} times</p>
-        &lt;button 
-          onClick={() => this.setState({ count: this.state.count + 1 })}>
-          Click me
-        </button>
-      </div>
-    );
-  }
-}
-</Code>
+1. Bu repoyu klonlayın:
 
-The state starts as `{ count: 0 }`, and we increment state.count when the user clicks a button by calling `this.setState()`. We’ll use snippets from this class throughout the page.
+    ```bash
+    git clone https://github.com/kullanici_adi/proje_adi.git
+    ```
 
-> ***Note***
->
-> You might be wondering why we’re using a counter here instead of a more realistic example. This is to help us focus on the API while we’re still making our first steps with Hooks.
+2. Proje dizinine gidin:
+
+    ```bash
+    cd proje_adi
+    ```
+
+3. Gerekli bağımlılıkları yükleyin:
+
+    ```bash
+    npm install
+    ```
+
+## Kullanım
+
+Projenizi başlatmak için:
+
+```bash
+npm start
