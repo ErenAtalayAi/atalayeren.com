@@ -1,40 +1,9 @@
-# Proje Başlığı
 
-## Açıklama
+### Özet
 
-Bu proje, [Proje Adı] adında bir uygulama veya yazılımın örnek bir `README.md` dosyasıdır. Proje, [Açıklama] amacıyla geliştirilmiştir ve [teknoloji] kullanılarak yapılmıştır.
+- GitHub'dan Markdown içeriğini doğru şekilde aldığınızdan emin olun.
+- Markdown içeriğini HTML'e dönüştürürken `marked` kütüphanesinin uygun şekilde kullanıldığından emin olun.
+- Markdown içeriğinin düzgün görünmesi için uygun CSS stillerini uygulayın.
+- Her şeyin doğru çalıştığından emin olmak için adım adım test yapın.
 
-## Özellikler
-
-- Özellik 1: [Açıklama]
-- Özellik 2: [Açıklama]
-- Özellik 3: [Açıklama]
-
-## Kurulum
-
-Projeyi yerel makinenize kurmak için aşağıdaki adımları takip edin:
-
-1. Bu repoyu klonlayın:
-
-    ```bash
-    git clone https://github.com/kullanici_adi/proje_adi.git
-    ```
-
-2. Proje dizinine gidin:
-
-    ```bash
-    cd proje_adi
-    ```
-
-3. Gerekli bağımlılıkları yükleyin:
-
-    ```bash
-    npm install
-    ```
-
-## Kullanım
-
-Projenizi başlatmak için:
-
-```bash
-npm start
+Eğer hala sorun yaşıyorsanız, spesifik bir hata veya sorunla ilgili daha fazla bilgi verirseniz, size daha spesifik yardım sunabilirim.
