@@ -1,41 +1,120 @@
-# The Future of Technology: Artificial Intelligence and Machine Learning
-
-The world of technology is constantly evolving, with artificial intelligence (AI) and machine learning (ML) leading these advancements. In this article, we will explore some predictions about the future roles of AI and ML, as well as current application areas.
-
-## What is Artificial Intelligence?
-
-Artificial intelligence refers to the ability of machines to perform tasks that typically require human intelligence. This includes tasks such as problem-solving, learning, reasoning, and language understanding.
-
-### Types of Artificial Intelligence
-
-1. **Narrow AI**: AI systems designed to perform specific tasks and lacking general intelligence. Examples include recommendation systems and voice assistants.
-2. **General AI**: AI with capabilities comparable to human intelligence, expected to exhibit general-purpose skills. As of now, General AI does not exist.
-
-## What is Machine Learning?
-
-Machine learning is a subset of AI that enables computers to learn from data and make predictions or decisions based on that data. Machine learning algorithms analyze large datasets to identify patterns and generate insights.
-
-### Types of Machine Learning
-
-- **Supervised Learning**: Models are trained on labeled data, and these models make predictions on new, unseen data.
-- **Unsupervised Learning**: Models work with unlabeled data to identify hidden structures or patterns within the data.
-- **Reinforcement Learning**: An agent learns by interacting with its environment and receiving rewards or penalties based on its actions.
-
-## Current Applications of AI and Machine Learning
-
-1. **Healthcare**: AI is used for early disease detection, creating personalized treatment plans, and analyzing health data.
-2. **Finance**: AI and machine learning solutions are applied in risk management, fraud detection, and algorithmic trading.
-3. **E-commerce**: Product recommendation systems and customer behavior analysis enhance the customer experience.
-
-## Future Predictions
-
-The future role of AI and machine learning is expected to involve greater integration into various industries and addressing societal challenges. Significant changes and improvements are anticipated, particularly in healthcare, education, and transportation.
-
-## Conclusion
-
-Artificial intelligence and machine learning will continue to play a pivotal role in the future of technology. These advancements will provide more efficient systems and innovative solutions, significantly impacting our lives. However, it is essential to address ethical and security considerations alongside these advancements.
-
+---
+title: 'React createElement() Kullanımı'
+date: '2022-05-10'
 ---
 
-*Author: Ahmet Yılmaz*  
-*Date: July 2024*
+# React createElement() Kullanımı
+
+Bildiğiniz gibi react'de html değil JSX yazıyoruz. Kullanımı kolay olması açısından neredeyse her şey html ile aynı. Tek önemli fark, etiketlerde `class` niteliği yerine `className` kullanıyoruz. Ya da örneğin `onclick` yerine `onClick` kullanıyoruz vs.
+
+JSX'i başka bir yazıda inceleriz, şimdilik bu kadarını bilsek yeterli olur sanırım. Peki JSX gibi güzel bir nimet varken neden `createElement()` API'si kullanılır? Aslında bunu bir örnekle açıklamak istiyorum.
+
+Örneğin bir `Button` componentimiz olsun. Ve bu componentimiz bazı `prop` lar alsın. Nedir bunlar, örneğin `icon`, `iconPosition`, `size`, `theme` gibi bir butonda olabilecek temel özellikler.
+
+```js
+// ./components/Button.js
+function Button({ children, icon = false, iconPosition: 'left', size = 'big', theme = 'default', ...props }) {
+  return (
+    <button className={classNames({
+      "flex items-center justify-center gap-x-1.5 text-center font-medium px-3 transition-colors rounded border shadow": true,
+      "h-9 text-sm": size === 'big',
+      "h-7 text-xs": size === 'small',
+      "bg-white text-black border-gray-200": theme === 'default',
+      "bg-green-600 text-white border-green-800": theme === 'success',
+      "bg-red-600 text-white border-red-800": theme === 'danger',
+      "flex-row-reverse": iconPosition === 'right'
+    })} {...props}>
+      {icon}
+      {children}
+    </button>
+  )
+}
+
+export default Button
+```
+
+Yukarıdaki component'in çalışması için bazı bağımlılıklara ihtiyacımız var. Öncelikle ben `tailwind` kullandığım için class'lı tanımlıyorum stil işlemlerini. Eğer daha doğru bir sonuç görmek isterseniz tailwind'i kurmanız gerekiyor. Kendi sitesinde bununla ilgili bir [yönlendirme](https://tailwindcss.com/docs/guides/create-react-app) var, onu takip edebilirsiniz. Bunu da daha kolay yönetmek için `classnames` paketini kullanıyorum. Bu paketi kurmak için;
+
+```
+npm install classnames
+yarn add classnames
+```
+
+Artık component'i import edip denemeler yapabiliriz.
+
+```js
+import Button from "./components/Button"
+import {BiCheck} from "react-icons/bi"
+
+function App() {
+  return (
+    <>
+      <Button>Tayfun Erbilen</Button>
+      <Button size="small">Tayfun Erbilen</Button>
+      <Button theme="success" icon={<BiCheck size={16} />}>Başarılı</Button>
+      <Button theme="success" icon={<BiCheck size={16} />} iconPosition="right">Başarılı</Button>
+    <(>
+  )
+}
+```
+
+> **Not:** İkonlar için `react-icons` paketini kullanıyorum. Dilerseniz onu da şöyle kurabilirsiniz.
+> `npm install react-icons` ya da yarn kullanıyorsanız `yarn add react-icons`
+
+Şimdi gelelim sorumuza, biz bu component'i `button` etiketi yerine `a` etiketi ile nasıl değiştiririz? Bazı yerlerde `button` bazı yerlerde `a` etiketine ihtiyacımız var? Hatta bazı yerlerde, `react-router-dom` paketinin `NavLink` componentiyle kullanmamız gerekiyor?
+
+İşte bu noktada, bu component'i `createElement()` API ile oluşturarak daha fazla özelleştirme yapabiliriz. Hadi gelin, aynı component'i tekrar `createElement()` ile yazalım.
+
+Temelde `createElement()` şu yapıdadır;
+
+```js
+import { createElement } from "react"
+
+function Button() {
+  return createElement('button', {
+    className: 'button'
+  }, 'Ben Butonum')
+}
+```
+
+Yani 3 parametre alıyor, etiketin adı, prop'lar ve text. Şimdi bunu bizim componentimize uyarlayalım.
+
+```js
+// ./components/Button.js
+import { createElement } from "react"
+
+function Button({ children, as = 'button', icon = false, iconPosition: 'left', size = 'big', theme = 'default', ...props }) {
+  return createElement(as, {
+    className: classNames({
+      "flex items-center justify-center gap-x-1.5 text-center font-medium px-3 transition-colors rounded border shadow": true,
+      "h-9 text-sm": size === 'big',
+      "h-7 text-xs": size === 'small',
+      "bg-white text-black border-gray-200": theme === 'default',
+      "bg-green-600 text-white border-green-800": theme === 'success',
+      "bg-red-600 text-white border-red-800": theme === 'danger',
+      "flex-row-reverse": iconPosition === 'right'
+    }),
+    ...props
+  }, children)
+}
+
+export default Button
+```
+
+Artık component'e prop olarak `as` altında istediğimiz etiketi ya da component'i belirterek component'in nasıl render olacağına karar verebiliriz.
+
+```js
+import Button from "./components/Button"
+import {BiCheck} from "react-icons/bi"
+import {NavLink} from "react-router-dom"
+
+function App() {
+  return (
+    <>
+      <Button>Tayfun Erbilen</Button>
+      <Button as="a" href="https://prototurk.com" target="_blank" size="small">Prototürk'e Git</Button>
+      <Button as={NavLink} to="/" theme="success" icon={<BiCheck size={16} />}>Geri Dön</Button>
+    <(>
+  )
+}
+```
