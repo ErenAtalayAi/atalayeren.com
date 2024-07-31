@@ -1,4 +1,4 @@
-# Artificial Intelligence: An In-Depth Exploration
+# Ai Unveiled
 
 Artificial Intelligence (AI) is one of the most advanced and exciting fields in information technology. Covering a broad spectrum from fundamental concepts to application areas, AI has the potential to revolutionize various industries. In this article, we will delve into the depths of AI, providing a comprehensive examination from basic principles to application areas and future developments.
 
