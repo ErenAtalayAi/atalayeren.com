@@ -1,4 +1,4 @@
-# Cross-Site Scripting (XSS) Attacks: Threats and Mitigation Strategies
+# XSS Overview
 
 ## Introduction
 
